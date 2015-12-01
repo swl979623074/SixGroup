@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sixth.sixthgroup.dao.HistoryStudentMapper" >
+  <resultMap id="BaseResultMap" type="sixth.sixthgroup.model.HistoryStudent" >
+    <id column="hist_id" property="histId" jdbcType="INTEGER" />
+    <result column="hist_studentid" property="histStudentid" jdbcType="INTEGER" />
+    <result column="hist_count" property="histCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hist_id, hist_studentid, hist_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from historystudent
+    where hist_id = #{histId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from historystudent
+    where hist_id = #{histId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="sixth.sixthgroup.model.HistoryStudent" >
+    insert into historystudent (hist_id, hist_studentid, hist_count
+      )
+    values (#{histId,jdbcType=INTEGER}, #{histStudentid,jdbcType=INTEGER}, #{histCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="sixth.sixthgroup.model.HistoryStudent" >
+    insert into historystudent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="histId != null" >
+        hist_id,
+      </if>
+      <if test="histStudentid != null" >
+        hist_studentid,
+      </if>
+      <if test="histCount != null" >
+        hist_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="histId != null" >
+        #{histId,jdbcType=INTEGER},
+      </if>
+      <if test="histStudentid != null" >
+        #{histStudentid,jdbcType=INTEGER},
+      </if>
+      <if test="histCount != null" >
+        #{histCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="sixth.sixthgroup.model.HistoryStudent" >
+    update historystudent
+    <set >
+      <if test="histStudentid != null" >
+        hist_studentid = #{histStudentid,jdbcType=INTEGER},
+      </if>
+      <if test="histCount != null" >
+        hist_count = #{histCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hist_id = #{histId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="sixth.sixthgroup.model.HistoryStudent" >
+    update historystudent
+    set hist_studentid = #{histStudentid,jdbcType=INTEGER},
+      hist_count = #{histCount,jdbcType=INTEGER}
+    where hist_id = #{histId,jdbcType=INTEGER}
+  </update>
+</mapper>
