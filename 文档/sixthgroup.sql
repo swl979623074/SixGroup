@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2015-12-01 09:03:01
+Date: 2015-12-04 22:08:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -180,6 +180,11 @@ CREATE TABLE `student` (
   `stud_qq` int(11) default NULL,
   `stud_address` varchar(255) default NULL,
   `stud_idcard` varchar(255) default NULL,
+  `stud_num` int(11) default NULL,
+  `stud_bron` date default NULL,
+  `stud_banknum` int(11) default NULL,
+  `stud_nation` varchar(255) default NULL,
+  `stud_dorimitory` varchar(255) default NULL,
   PRIMARY KEY  (`stud_id`),
   KEY `fk_grade` (`stud_gradeid`),
   CONSTRAINT `fk_grade` FOREIGN KEY (`stud_gradeid`) REFERENCES `grade` (`grad_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -188,10 +193,10 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('1', null, 'swl', null, null, null, null, null, null);
-INSERT INTO `student` VALUES ('2', null, 'wang', null, null, null, null, null, null);
-INSERT INTO `student` VALUES ('3', null, 'li', null, null, null, null, null, null);
-INSERT INTO `student` VALUES ('4', null, 'zhao', null, null, null, null, null, null);
+INSERT INTO `student` VALUES ('1', null, 'swl', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `student` VALUES ('2', null, 'wang', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `student` VALUES ('3', null, 'li', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `student` VALUES ('4', null, 'zhao', null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for teacher
@@ -226,9 +231,10 @@ CREATE TABLE `user` (
   PRIMARY KEY  (`user_id`),
   KEY `fk_power` (`user_power`),
   CONSTRAINT `fk_power` FOREIGN KEY (`user_power`) REFERENCES `power` (`powe_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'swl', '123', '1');
+INSERT INTO `user` VALUES ('5', 'swll', '123', '1');
