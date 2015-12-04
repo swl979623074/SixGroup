@@ -9,7 +9,7 @@ public class User {
 
     private Integer userPower;
 
-    public Integer getUserId() {
+	public Integer getUserId() {
         return userId;
     }
 

@@ -1,5 +1,7 @@
 package sixth.sixthgroup.dao;
 
+import java.util.List;
+
 import sixth.sixthgroup.model.Academy;
 
 public interface AcademyMapper {
@@ -14,4 +16,9 @@ public interface AcademyMapper {
     int updateByPrimaryKeySelective(Academy record);
 
     int updateByPrimaryKey(Academy record);
+    /**
+     * 获取所有学院
+     * @return list
+     */
+    List<Academy> selectAll();
 }

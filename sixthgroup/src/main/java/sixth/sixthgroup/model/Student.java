@@ -1,5 +1,7 @@
 package sixth.sixthgroup.model;
 
+import java.util.Date;
+
 public class Student {
     private Integer studId;
 
@@ -18,6 +20,16 @@ public class Student {
     private String studAddress;
 
     private String studIdcard;
+
+    private Integer studNum;
+
+    private Date studBron;
+
+    private Integer studBanknum;
+
+    private String studNation;
+
+    private String studDorimitory;
 
     public Integer getStudId() {
         return studId;
@@ -89,5 +101,45 @@ public class Student {
 
     public void setStudIdcard(String studIdcard) {
         this.studIdcard = studIdcard == null ? null : studIdcard.trim();
+    }
+
+    public Integer getStudNum() {
+        return studNum;
+    }
+
+    public void setStudNum(Integer studNum) {
+        this.studNum = studNum;
+    }
+
+    public Date getStudBron() {
+        return studBron;
+    }
+
+    public void setStudBron(Date studBron) {
+        this.studBron = studBron;
+    }
+
+    public Integer getStudBanknum() {
+        return studBanknum;
+    }
+
+    public void setStudBanknum(Integer studBanknum) {
+        this.studBanknum = studBanknum;
+    }
+
+    public String getStudNation() {
+        return studNation;
+    }
+
+    public void setStudNation(String studNation) {
+        this.studNation = studNation == null ? null : studNation.trim();
+    }
+
+    public String getStudDorimitory() {
+        return studDorimitory;
+    }
+
+    public void setStudDorimitory(String studDorimitory) {
+        this.studDorimitory = studDorimitory == null ? null : studDorimitory.trim();
     }
 }

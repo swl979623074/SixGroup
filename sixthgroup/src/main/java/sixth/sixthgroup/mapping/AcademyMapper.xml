@@ -55,4 +55,11 @@
     set acad_name = #{acadName,jdbcType=VARCHAR}
     where acad_id = #{acadId,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from academy
+  </select>
 </mapper>

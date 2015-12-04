@@ -79,4 +79,13 @@
       user_power = #{userPower,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自己写的代码 -->
+  <select id="slectUserByNameAndPasword" resultMap="BaseResultMap" parameterType="sixth.sixthgroup.model.User" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+          and user_password = #{userPassword,jdbcType=VARCHAR}
+  </select>
 </mapper>

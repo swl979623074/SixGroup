@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
 		this.userMapper = userMapper;
 	}
 
+	/**
+	 * 查找用户
+	 * 参数  id
+	 * 返回值 User
+	 */
 	@SuppressWarnings("finally")
 	public User findUserById(int id) throws Exception {
 		// TODO Auto-generated method stub
@@ -31,5 +36,56 @@ public class UserServiceImpl implements UserService {
 			return  user;
 		}
 	}
-
+	/**
+	 * 查找用户 
+	 * 参数 loginnaem，password
+	 * 返回值 User
+	 */
+	@SuppressWarnings("finally")
+	public User findUserByNameAndPassword(String loginnaem, String password)
+			throws Exception {
+		// TODO Auto-generated method stub
+		User user = new User();
+		user.setUserName(loginnaem);
+		user.setUserPassword(password);
+		
+		User myUser=new User();
+		try{
+			myUser=this.userMapper.slectUserByNameAndPasword(user);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			return myUser;
+		}
+	}
+	/**
+	 * 添加一个用户
+	 * 参数 loginname password userpower
+	 * 返回值 int
+	 */
+	@SuppressWarnings("finally")
+	public int insertUser(String loginname, String password, int userpower)
+			throws Exception {
+		// TODO Auto-generated method stub
+		int key=0;
+		
+		User user = new User();
+		user.setUserName(loginname);
+		user.setUserPassword(password);
+		user.setUserPower(userpower);
+		
+		try{
+			User reUser=new User();
+			reUser=this.findUserByNameAndPassword(loginname, password);
+			if(reUser==null){
+				key=this.userMapper.insert(user);	
+			}
+			System.out.println(key);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			return key;
+		}
+	}
+	
 }
