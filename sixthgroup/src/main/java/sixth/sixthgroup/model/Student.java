@@ -15,17 +15,17 @@ public class Student {
 
     private String studTel;
 
-    private Integer studQq;
+    private String studQq;
 
     private String studAddress;
 
     private String studIdcard;
 
-    private Integer studNum;
+    private String studNum;
 
     private Date studBron;
 
-    private Integer studBanknum;
+    private String studBanknum;
 
     private String studNation;
 
@@ -79,12 +79,12 @@ public class Student {
         this.studTel = studTel == null ? null : studTel.trim();
     }
 
-    public Integer getStudQq() {
+    public String getStudQq() {
         return studQq;
     }
 
-    public void setStudQq(Integer studQq) {
-        this.studQq = studQq;
+    public void setStudQq(String studQq) {
+        this.studQq = studQq == null ? null : studQq.trim();
     }
 
     public String getStudAddress() {
@@ -103,12 +103,12 @@ public class Student {
         this.studIdcard = studIdcard == null ? null : studIdcard.trim();
     }
 
-    public Integer getStudNum() {
+    public String getStudNum() {
         return studNum;
     }
 
-    public void setStudNum(Integer studNum) {
-        this.studNum = studNum;
+    public void setStudNum(String studNum) {
+        this.studNum = studNum == null ? null : studNum.trim();
     }
 
     public Date getStudBron() {
@@ -119,12 +119,12 @@ public class Student {
         this.studBron = studBron;
     }
 
-    public Integer getStudBanknum() {
+    public String getStudBanknum() {
         return studBanknum;
     }
 
-    public void setStudBanknum(Integer studBanknum) {
-        this.studBanknum = studBanknum;
+    public void setStudBanknum(String studBanknum) {
+        this.studBanknum = studBanknum == null ? null : studBanknum.trim();
     }
 
     public String getStudNation() {

@@ -20,15 +20,20 @@ public class AcademyServiceImpl implements AcademyService {
 	public void setAcademyMapper(AcademyMapper academyMapper) {
 		this.academyMapper = academyMapper;
 	}
-
-	/**
-	 * 获取所有学院
-	 * 返回值 学院列表
-	 */
+	
 	public List<Academy> getAll() {
 		// TODO Auto-generated method stub
 		List<Academy> list = this.academyMapper.selectAll();
 		return list;
+	}
+	
+	public int getIdByName(String name) {
+		// TODO Auto-generated method stub
+		int key=0;
+		Academy academy=new Academy();
+		academy=this.academyMapper.selectByName(name);
+		key=academy.getAcadId();
+		return key;
 	}
 
 }

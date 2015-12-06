@@ -21,4 +21,8 @@ public interface AcademyMapper {
      * @return list
      */
     List<Academy> selectAll();
+    /**
+     * 通过学院名称查找学院的id
+     */
+    Academy selectByName(String acadName);
 }

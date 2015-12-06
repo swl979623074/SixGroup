@@ -8,12 +8,12 @@
     <result column="stud_sex" property="studSex" jdbcType="VARCHAR" />
     <result column="stud_age" property="studAge" jdbcType="VARCHAR" />
     <result column="stud_tel" property="studTel" jdbcType="VARCHAR" />
-    <result column="stud_qq" property="studQq" jdbcType="INTEGER" />
+    <result column="stud_qq" property="studQq" jdbcType="VARCHAR" />
     <result column="stud_address" property="studAddress" jdbcType="VARCHAR" />
     <result column="stud_idcard" property="studIdcard" jdbcType="VARCHAR" />
-    <result column="stud_num" property="studNum" jdbcType="INTEGER" />
+    <result column="stud_num" property="studNum" jdbcType="VARCHAR" />
     <result column="stud_bron" property="studBron" jdbcType="DATE" />
-    <result column="stud_banknum" property="studBanknum" jdbcType="INTEGER" />
+    <result column="stud_banknum" property="studBanknum" jdbcType="VARCHAR" />
     <result column="stud_nation" property="studNation" jdbcType="VARCHAR" />
     <result column="stud_dorimitory" property="studDorimitory" jdbcType="VARCHAR" />
   </resultMap>
@@ -39,8 +39,8 @@
       stud_nation, stud_dorimitory)
     values (#{studId,jdbcType=INTEGER}, #{studGradeid,jdbcType=INTEGER}, #{studName,jdbcType=VARCHAR}, 
       #{studSex,jdbcType=VARCHAR}, #{studAge,jdbcType=VARCHAR}, #{studTel,jdbcType=VARCHAR}, 
-      #{studQq,jdbcType=INTEGER}, #{studAddress,jdbcType=VARCHAR}, #{studIdcard,jdbcType=VARCHAR}, 
-      #{studNum,jdbcType=INTEGER}, #{studBron,jdbcType=DATE}, #{studBanknum,jdbcType=INTEGER}, 
+      #{studQq,jdbcType=VARCHAR}, #{studAddress,jdbcType=VARCHAR}, #{studIdcard,jdbcType=VARCHAR}, 
+      #{studNum,jdbcType=VARCHAR}, #{studBron,jdbcType=DATE}, #{studBanknum,jdbcType=VARCHAR}, 
       #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="sixth.sixthgroup.model.Student" >
@@ -109,7 +109,7 @@
         #{studTel,jdbcType=VARCHAR},
       </if>
       <if test="studQq != null" >
-        #{studQq,jdbcType=INTEGER},
+        #{studQq,jdbcType=VARCHAR},
       </if>
       <if test="studAddress != null" >
         #{studAddress,jdbcType=VARCHAR},
@@ -118,13 +118,13 @@
         #{studIdcard,jdbcType=VARCHAR},
       </if>
       <if test="studNum != null" >
-        #{studNum,jdbcType=INTEGER},
+        #{studNum,jdbcType=VARCHAR},
       </if>
       <if test="studBron != null" >
         #{studBron,jdbcType=DATE},
       </if>
       <if test="studBanknum != null" >
-        #{studBanknum,jdbcType=INTEGER},
+        #{studBanknum,jdbcType=VARCHAR},
       </if>
       <if test="studNation != null" >
         #{studNation,jdbcType=VARCHAR},
@@ -153,7 +153,7 @@
         stud_tel = #{studTel,jdbcType=VARCHAR},
       </if>
       <if test="studQq != null" >
-        stud_qq = #{studQq,jdbcType=INTEGER},
+        stud_qq = #{studQq,jdbcType=VARCHAR},
       </if>
       <if test="studAddress != null" >
         stud_address = #{studAddress,jdbcType=VARCHAR},
@@ -162,13 +162,13 @@
         stud_idcard = #{studIdcard,jdbcType=VARCHAR},
       </if>
       <if test="studNum != null" >
-        stud_num = #{studNum,jdbcType=INTEGER},
+        stud_num = #{studNum,jdbcType=VARCHAR},
       </if>
       <if test="studBron != null" >
         stud_bron = #{studBron,jdbcType=DATE},
       </if>
       <if test="studBanknum != null" >
-        stud_banknum = #{studBanknum,jdbcType=INTEGER},
+        stud_banknum = #{studBanknum,jdbcType=VARCHAR},
       </if>
       <if test="studNation != null" >
         stud_nation = #{studNation,jdbcType=VARCHAR},
@@ -186,14 +186,39 @@
       stud_sex = #{studSex,jdbcType=VARCHAR},
       stud_age = #{studAge,jdbcType=VARCHAR},
       stud_tel = #{studTel,jdbcType=VARCHAR},
-      stud_qq = #{studQq,jdbcType=INTEGER},
+      stud_qq = #{studQq,jdbcType=VARCHAR},
       stud_address = #{studAddress,jdbcType=VARCHAR},
       stud_idcard = #{studIdcard,jdbcType=VARCHAR},
-      stud_num = #{studNum,jdbcType=INTEGER},
+      stud_num = #{studNum,jdbcType=VARCHAR},
       stud_bron = #{studBron,jdbcType=DATE},
-      stud_banknum = #{studBanknum,jdbcType=INTEGER},
+      stud_banknum = #{studBanknum,jdbcType=VARCHAR},
       stud_nation = #{studNation,jdbcType=VARCHAR},
       stud_dorimitory = #{studDorimitory,jdbcType=VARCHAR}
     where stud_id = #{studId,jdbcType=INTEGER}
   </update>
+  
+   <!-- 自己写的方法 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+  </select>
+  <select id="selectByStudNum" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where stud_num = #{studNum,jdbcType=VARCHAR}
+  </select>
+  <insert id="insertOneStudent" parameterType="sixth.sixthgroup.model.Student" >
+    insert into student (stud_id, stud_gradeid, stud_name, 
+      stud_sex, stud_age, stud_tel, 
+      stud_qq, stud_address, stud_idcard, 
+      stud_num, stud_bron, stud_banknum, 
+      stud_nation, stud_dorimitory)
+    values (#{studId,jdbcType=INTEGER}, #{studGradeid,jdbcType=INTEGER}, #{studName,jdbcType=VARCHAR}, 
+      #{studSex,jdbcType=VARCHAR}, #{studAge,jdbcType=VARCHAR}, #{studTel,jdbcType=VARCHAR}, 
+      #{studQq,jdbcType=INTEGER}, #{studAddress,jdbcType=VARCHAR}, #{studIdcard,jdbcType=VARCHAR}, 
+      #{studNum,jdbcType=INTEGER}, #{studBron,jdbcType=DATE}, #{studBanknum,jdbcType=INTEGER}, 
+      #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR})
+  </insert>
 </mapper>

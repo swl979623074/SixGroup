@@ -90,4 +90,16 @@
       grad_monitor = #{gradMonitor,jdbcType=INTEGER}
     where grad_id = #{gradId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自己写的方法 -->
+  <select id="selectByClassName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from grade
+    where grad_name = #{gradName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from grade
+  </select>
 </mapper>

@@ -56,10 +56,15 @@
     where acad_id = #{acadId,jdbcType=INTEGER}
   </update>
   
-  
+  <!-- 自己写的代码 -->
   <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from academy
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select *
+    from academy
+    where acad_name = #{acadName,jdbcType=VARCHAR}
   </select>
 </mapper>
