@@ -15,4 +15,10 @@ public interface UserService {
 	 * 添加一个用户
 	 */
 	public int insertUser(String loginname,String password,int userpower) throws Exception;
+	/**
+	 * 添加一个用户
+	 * @param user 被添加用户的信息
+	 * @return
+	 */
+	public int insertUser(User user)throws Exception;
 }

@@ -23,4 +23,14 @@ public interface GradeService {
 	 * @return
 	 */
 	public List<Grade> selectAll();
+	/**
+	 * 通过班级id修改班级的班长id
+	 * @param record
+	 * @return
+	 */
+	public int updateByPrimaryKey(Grade record);
+	/**
+	 * 通过班级id查找班级
+	 */
+	public Grade selectByClassId(int classId);
 }

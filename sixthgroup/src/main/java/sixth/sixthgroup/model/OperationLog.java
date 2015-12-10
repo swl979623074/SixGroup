@@ -10,8 +10,18 @@ public class OperationLog {
     private String oploContent;
 
     private Date oploTime;
+    
+    private String time;
 
-    public Integer getOploId() {
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public Integer getOploId() {
         return oploId;
     }
 

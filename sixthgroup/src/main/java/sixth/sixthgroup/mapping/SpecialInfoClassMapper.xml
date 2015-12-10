@@ -55,4 +55,11 @@
     set spcl_name = #{spclName,jdbcType=VARCHAR}
     where spcl_id = #{spclId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自己写的方法 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from specialinfoclass
+  </select>
 </mapper>

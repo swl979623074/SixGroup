@@ -45,4 +45,22 @@ public class GradeServiceImpl implements GradeService {
 		return list;
 	}
 
+	public int updateByPrimaryKey(Grade record) {
+		// TODO Auto-generated method stub
+		int key=0;
+		Grade test= new Grade();
+		test=this.gradeMapper.selectByPrimaryKey(record.getGradId());
+		if(test != null){
+			key=this.gradeMapper.updateByPrimaryKey(record);
+		}
+		return key;
+	}
+
+	public Grade selectByClassId(int classId) {
+		// TODO Auto-generated method stub
+		Grade grade = new Grade();
+		grade=this.gradeMapper.selectByPrimaryKey(classId);
+		return grade;
+	}
+
 }

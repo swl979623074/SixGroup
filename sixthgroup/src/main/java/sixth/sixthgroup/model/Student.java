@@ -31,7 +31,21 @@ public class Student {
 
     private String studDorimitory;
 
-    public Integer getStudId() {
+    private String studParentname;
+
+    private String studParenttel;
+
+    private String bothTime;
+    
+    public String getBothTime() {
+		return bothTime;
+	}
+
+	public void setBothTime(String bothTime) {
+		this.bothTime = bothTime;
+	}
+
+	public Integer getStudId() {
         return studId;
     }
 
@@ -141,5 +155,21 @@ public class Student {
 
     public void setStudDorimitory(String studDorimitory) {
         this.studDorimitory = studDorimitory == null ? null : studDorimitory.trim();
+    }
+
+    public String getStudParentname() {
+        return studParentname;
+    }
+
+    public void setStudParentname(String studParentname) {
+        this.studParentname = studParentname == null ? null : studParentname.trim();
+    }
+
+    public String getStudParenttel() {
+        return studParenttel;
+    }
+
+    public void setStudParenttel(String studParenttel) {
+        this.studParenttel = studParenttel == null ? null : studParenttel.trim();
     }
 }

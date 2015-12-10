@@ -1,5 +1,7 @@
 package sixth.sixthgroup.dao;
 
+import java.util.List;
+
 import sixth.sixthgroup.model.Diary;
 
 public interface DiaryMapper {
@@ -14,4 +16,9 @@ public interface DiaryMapper {
     int updateByPrimaryKeySelective(Diary record);
 
     int updateByPrimaryKey(Diary record);
+    /**
+     * 查找所有记录
+     * @return
+     */
+    List<Diary> selectAll();
 }

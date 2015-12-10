@@ -1,6 +1,7 @@
 package sixth.sixthgroup.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,8 @@ import sixth.sixthgroup.service.StudentService;
 @Controller
 @RequestMapping("/studentController")
 public class StudentController {
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
 	private StudentService studentService;
 
 	public StudentService getStudentService() {
@@ -44,9 +47,19 @@ public class StudentController {
 		Map map = new HashMap();
 		try {
 			List<Student> list=this.studentService.getAll();
-			if(list.size()>0){
+			List<Student> studList = new ArrayList();
+			int len=list.size();
+			for(int i=0;i<len;i++){
+				Student test = new Student();
+				test=list.get(i);
+				if(test.getStudBron()!=null){
+					test.setBothTime(DATE_FORMAT.format(test.getStudBron()));
+				}
+				studList.add(test);
+			}
+			if(len>0){
 				map.put("result", Boolean.TRUE);
-				map.put("studentList", list);
+				map.put("studList", studList);
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
@@ -75,6 +88,7 @@ public class StudentController {
 		try {
 			Student student=new Student();
 			student=this.studentService.getOneStudent(studNum);
+			student.setBothTime(DATE_FORMAT.format(student.getStudBron()));
 			if(student!=null){
 				map.put("result", Boolean.TRUE);
 				map.put("student",student );
@@ -91,21 +105,39 @@ public class StudentController {
 		}
 	}
 	
+	/**
+	 * 添加一个学生
+	 * @param studGradeid 班级id
+	 * @param studName 姓名
+	 * @param studSex 性别
+	 * @param studAge 年龄
+	 * @param studTel 电话
+	 * @param studQq QQ
+	 * @param studAddress 住址
+	 * @param studIdcard 省份证号
+	 * @param studNum 学号
+	 * @param studBron 出生日期
+	 * @param studBanknum 银行卡号
+	 * @param studNation 民族
+	 * @param studDorimitory 宿舍
+	 * @param studParentname 家长姓名
+	 * @param studParenttel 家长电话
+	 * @return
+	 */
 	@SuppressWarnings({ "finally", "unchecked" })
 	@RequestMapping("/insertOneStudent")
 	public ModelAndView insertOneStudent(int studGradeid,String studName,String studSex,
 			String studAge,String studTel,String studQq,
 			String studAddress,String studIdcard,String studNum,
 			String studBron,String studBanknum,String studNation,
-			String studDorimitory,HttpServletRequest request,HttpServletResponse response) {
+			String studDorimitory,String studParentname,String studParenttel,
+			HttpServletRequest request,HttpServletResponse response) {
 	    ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
 		try {
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-			String dstr=studBron; 
-			java.util.Date date=sdf.parse(dstr);  
+			java.util.Date date=DATE_FORMAT.parse(studBron);  
 			
 			Student student=new Student();
 			student.setStudAddress(studAddress);
@@ -121,6 +153,8 @@ public class StudentController {
 			student.setStudQq(studQq);
 			student.setStudSex(studSex);
 			student.setStudTel(studTel);
+			student.setStudParentname(studParentname);
+			student.setStudParenttel(studParenttel);
 			
 			int key=0;
 			key=this.studentService.addOneStudent(student);

@@ -45,4 +45,11 @@ public class StudentServiceImpl implements StudentService {
 		}	
 		return key;
 	}
+	public Student getOneStudentById(int studId) {
+		// TODO Auto-generated method stub
+		Student studetn=new Student();
+		studetn=this.studentMapper.selectByPrimaryKey(studId);
+		return studetn;
+	}
+	
 }

@@ -16,10 +16,13 @@
     <result column="stud_banknum" property="studBanknum" jdbcType="VARCHAR" />
     <result column="stud_nation" property="studNation" jdbcType="VARCHAR" />
     <result column="stud_dorimitory" property="studDorimitory" jdbcType="VARCHAR" />
+    <result column="stud_parentname" property="studParentname" jdbcType="VARCHAR" />
+    <result column="stud_parenttel" property="studParenttel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     stud_id, stud_gradeid, stud_name, stud_sex, stud_age, stud_tel, stud_qq, stud_address, 
-    stud_idcard, stud_num, stud_bron, stud_banknum, stud_nation, stud_dorimitory
+    stud_idcard, stud_num, stud_bron, stud_banknum, stud_nation, stud_dorimitory, stud_parentname, 
+    stud_parenttel
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,12 +39,14 @@
       stud_sex, stud_age, stud_tel, 
       stud_qq, stud_address, stud_idcard, 
       stud_num, stud_bron, stud_banknum, 
-      stud_nation, stud_dorimitory)
+      stud_nation, stud_dorimitory, stud_parentname, 
+      stud_parenttel)
     values (#{studId,jdbcType=INTEGER}, #{studGradeid,jdbcType=INTEGER}, #{studName,jdbcType=VARCHAR}, 
       #{studSex,jdbcType=VARCHAR}, #{studAge,jdbcType=VARCHAR}, #{studTel,jdbcType=VARCHAR}, 
       #{studQq,jdbcType=VARCHAR}, #{studAddress,jdbcType=VARCHAR}, #{studIdcard,jdbcType=VARCHAR}, 
       #{studNum,jdbcType=VARCHAR}, #{studBron,jdbcType=DATE}, #{studBanknum,jdbcType=VARCHAR}, 
-      #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR})
+      #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR}, #{studParentname,jdbcType=VARCHAR}, 
+      #{studParenttel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="sixth.sixthgroup.model.Student" >
     insert into student
@@ -88,6 +93,12 @@
       <if test="studDorimitory != null" >
         stud_dorimitory,
       </if>
+      <if test="studParentname != null" >
+        stud_parentname,
+      </if>
+      <if test="studParenttel != null" >
+        stud_parenttel,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="studId != null" >
@@ -131,6 +142,12 @@
       </if>
       <if test="studDorimitory != null" >
         #{studDorimitory,jdbcType=VARCHAR},
+      </if>
+      <if test="studParentname != null" >
+        #{studParentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studParenttel != null" >
+        #{studParenttel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +193,12 @@
       <if test="studDorimitory != null" >
         stud_dorimitory = #{studDorimitory,jdbcType=VARCHAR},
       </if>
+      <if test="studParentname != null" >
+        stud_parentname = #{studParentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studParenttel != null" >
+        stud_parenttel = #{studParenttel,jdbcType=VARCHAR},
+      </if>
     </set>
     where stud_id = #{studId,jdbcType=INTEGER}
   </update>
@@ -193,7 +216,9 @@
       stud_bron = #{studBron,jdbcType=DATE},
       stud_banknum = #{studBanknum,jdbcType=VARCHAR},
       stud_nation = #{studNation,jdbcType=VARCHAR},
-      stud_dorimitory = #{studDorimitory,jdbcType=VARCHAR}
+      stud_dorimitory = #{studDorimitory,jdbcType=VARCHAR},
+      stud_parentname = #{studParentname,jdbcType=VARCHAR},
+      stud_parenttel = #{studParenttel,jdbcType=VARCHAR}
     where stud_id = #{studId,jdbcType=INTEGER}
   </update>
   

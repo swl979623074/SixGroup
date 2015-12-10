@@ -22,4 +22,10 @@ public interface StudentService {
 	 * @return
 	 */
 	public int addOneStudent(Student student);
+	/**
+	 * 通过学号查找一个学生
+	 * @param studId
+	 * @return
+	 */
+	public Student getOneStudentById(int studId);
 }

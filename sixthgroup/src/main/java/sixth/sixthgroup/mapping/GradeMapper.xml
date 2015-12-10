@@ -98,7 +98,7 @@
     where grad_name = #{gradName,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from grade
   </select>

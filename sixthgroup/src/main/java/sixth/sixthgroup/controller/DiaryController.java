@@ -1,5 +1,7 @@
 package sixth.sixthgroup.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,45 +15,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
-import sixth.sixthgroup.model.Grade;
-import sixth.sixthgroup.service.GradeService;
+import sixth.sixthgroup.model.Diary;
+import sixth.sixthgroup.service.DiaryService;
 
 @Controller
-@RequestMapping("/gradeController")
-public class GradeController {
-	private GradeService gradeService;
+@RequestMapping("/DiaryController")
+public class DiaryController {
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-	public GradeService getGradeService() {
-		return gradeService;
+	private DiaryService diaryService;
+
+	public DiaryService getDiaryService() {
+		return diaryService;
 	}
 	@Autowired
-	public void setGradeService(GradeService gradeService) {
-		this.gradeService = gradeService;
+	public void setDiaryService(DiaryService diaryService) {
+		this.diaryService = diaryService;
 	}
-	
 	/**
-	 * 添加一个班级
-	 * @param name 班级名称
-	 * @param counselorId 辅导员id
+	 * 添加一条日记
+	 * @param content 内容
+	 * @param time 截止时间
 	 * @return
 	 */
 	@SuppressWarnings({ "finally", "unchecked" })
-	@RequestMapping("/addOneClass")
-	public ModelAndView addOneClass(String name, int counselorId,HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping("/insertOne")
+	public ModelAndView insertOne(String content,String time, HttpServletRequest request,HttpServletResponse response) {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
 		try {
-			Grade grade= new Grade();
-			grade.setGradName(name);
-			grade.setGradCounselor(counselorId);
+			java.util.Date date=DATE_FORMAT.parse(time);
+			
+			Diary diary=new Diary();
+			diary.setDiarContent(content);
+			diary.setDiarTime(date);
+			diary.setDiarUser(2);
 			
 			int key=0;
-			key=this.gradeService.addOneClass(grade);
-			if(key != 0){
+			key=this.diaryService.insertOne(diary);
+			if(key==1){
 				map.put("result", Boolean.TRUE);
-				map.put("grade",grade );
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
@@ -67,28 +72,25 @@ public class GradeController {
 	}
 	
 	/**
-	 * 通过班级名称查找班级
-	 * @param gradName 班级名称
+	 * 删除一条日记
+	 * @param id 日记的id
 	 * @return
 	 */
 	@SuppressWarnings({ "finally", "unchecked" })
-	@RequestMapping("/selectByClassName")
-	public ModelAndView selectByClassName(String gradName, HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping("/deleteById")
+	public ModelAndView deleteById(int id, HttpServletRequest request,HttpServletResponse response) {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
 		try {
-			System.out.println(gradName);
-			Grade grade= new Grade();
-			grade=this.gradeService.selectByClassName(gradName);
-			if(grade != null){
+			int key = 0;
+			key=this.diaryService.deleteByPrimaryKey(id);
+			if(key==1){
 				map.put("result", Boolean.TRUE);
-				map.put("grade",grade );
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
@@ -98,22 +100,35 @@ public class GradeController {
 			return mav;
 		}
 	}
+	
 	/**
-	 * 获取所有班级
-	 * @return list
+	 * 获取所有的日记
+	 * @param request
+	 * @param response
+	 * @return
 	 */
 	@SuppressWarnings({ "finally", "unchecked" })
 	@RequestMapping("/selectAll")
-	public ModelAndView selectAll(HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView selectAll( HttpServletRequest request,HttpServletResponse response) {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
 		try {
-			List<Grade> list=this.gradeService.selectAll();
-			if(list.size()>0){
+			List<Diary> list=this.diaryService.selectAll();
+			List<Diary> diaryList = new ArrayList();
+			int len=list.size();
+			for(int i=0;i<len;i++){
+				Diary test= new Diary();
+				test=list.get(i);
+				test.setTime(DATE_FORMAT.format(test.getDiarTime()));
+				
+				diaryList.add(test);
+			}
+			
+			if(len>0){
 				map.put("result", Boolean.TRUE);
-				map.put("gradeList", list);
+				map.put("diaryList",diaryList );
 			}else{
 				map.put("result", Boolean.FALSE);
 			}

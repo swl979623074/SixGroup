@@ -5,7 +5,7 @@
     <id column="oplo_id" property="oploId" jdbcType="INTEGER" />
     <result column="oplo_peopleid" property="oploPeopleid" jdbcType="INTEGER" />
     <result column="oplo_content" property="oploContent" jdbcType="VARCHAR" />
-    <result column="oplo_time" property="oploTime" jdbcType="TIMESTAMP" />
+    <result column="oplo_time" property="oploTime" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
     oplo_id, oplo_peopleid, oplo_content, oplo_time
@@ -24,7 +24,7 @@
     insert into operationlog (oplo_id, oplo_peopleid, oplo_content, 
       oplo_time)
     values (#{oploId,jdbcType=INTEGER}, #{oploPeopleid,jdbcType=INTEGER}, #{oploContent,jdbcType=VARCHAR}, 
-      #{oploTime,jdbcType=TIMESTAMP})
+      #{oploTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="sixth.sixthgroup.model.OperationLog" >
     insert into operationlog
@@ -53,7 +53,7 @@
         #{oploContent,jdbcType=VARCHAR},
       </if>
       <if test="oploTime != null" >
-        #{oploTime,jdbcType=TIMESTAMP},
+        #{oploTime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -67,7 +67,7 @@
         oplo_content = #{oploContent,jdbcType=VARCHAR},
       </if>
       <if test="oploTime != null" >
-        oplo_time = #{oploTime,jdbcType=TIMESTAMP},
+        oplo_time = #{oploTime,jdbcType=DATE},
       </if>
     </set>
     where oplo_id = #{oploId,jdbcType=INTEGER}
@@ -76,7 +76,22 @@
     update operationlog
     set oplo_peopleid = #{oploPeopleid,jdbcType=INTEGER},
       oplo_content = #{oploContent,jdbcType=VARCHAR},
-      oplo_time = #{oploTime,jdbcType=TIMESTAMP}
+      oplo_time = #{oploTime,jdbcType=DATE}
     where oplo_id = #{oploId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自己写的方法 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from operationlog
+    ORDER BY oplo_time desc
+  </select>
+  <select id="selectByPeopleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from operationlog
+    where oplo_peopleid = #{oploPeopleid,jdbcType=INTEGER}
+    ORDER BY oplo_time desc
+  </select>
 </mapper>

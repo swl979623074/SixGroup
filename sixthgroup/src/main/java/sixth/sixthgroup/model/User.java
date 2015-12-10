@@ -9,7 +9,9 @@ public class User {
 
     private Integer userPower;
 
-	public Integer getUserId() {
+    private Integer userBelong;
+
+    public Integer getUserId() {
         return userId;
     }
 
@@ -39,5 +41,13 @@ public class User {
 
     public void setUserPower(Integer userPower) {
         this.userPower = userPower;
+    }
+
+    public Integer getUserBelong() {
+        return userBelong;
+    }
+
+    public void setUserBelong(Integer userBelong) {
+        this.userBelong = userBelong;
     }
 }

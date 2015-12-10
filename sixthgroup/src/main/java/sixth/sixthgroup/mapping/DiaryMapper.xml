@@ -79,4 +79,12 @@
       diar_time = #{diarTime,jdbcType=TIMESTAMP}
     where diar_id = #{diarId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自己写的方法 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from diary
+   	ORDER BY diar_time desc;
+  </select>
 </mapper>

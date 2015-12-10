@@ -87,5 +87,15 @@ public class UserServiceImpl implements UserService {
 			return key;
 		}
 	}
+	public int insertUser(User user) throws Exception {
+		// TODO Auto-generated method stub
+		int key=0;
+		User reUser = new User();
+		reUser=this.findUserByNameAndPassword(user.getUserName(), user.getUserPassword());
+		if(reUser==null){
+			key=this.userMapper.insert(user);
+		}
+		return key;
+	}
 	
 }
