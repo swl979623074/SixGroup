@@ -37,7 +37,17 @@ public class Student {
 
     private String bothTime;
     
-    public String getBothTime() {
+    private String gradName;
+    
+    public String getGradName() {
+		return gradName;
+	}
+
+	public void setGradName(String gradName) {
+		this.gradName = gradName;
+	}
+
+	public String getBothTime() {
 		return bothTime;
 	}
 

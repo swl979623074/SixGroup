@@ -228,11 +228,43 @@
     <include refid="Base_Column_List" />
     from student
   </select>
-  <select id="selectByStudNum" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select 
-    <include refid="Base_Column_List" />
-    from student
+  
+  <resultMap id="NewResultMap" type="sixth.sixthgroup.model.Student" >
+    <id column="stud_id" property="studId" jdbcType="INTEGER" />
+    <result column="stud_gradeid" property="studGradeid" jdbcType="INTEGER" />
+    <result column="stud_name" property="studName" jdbcType="VARCHAR" />
+    <result column="stud_sex" property="studSex" jdbcType="VARCHAR" />
+    <result column="stud_age" property="studAge" jdbcType="VARCHAR" />
+    <result column="stud_tel" property="studTel" jdbcType="VARCHAR" />
+    <result column="stud_qq" property="studQq" jdbcType="VARCHAR" />
+    <result column="stud_address" property="studAddress" jdbcType="VARCHAR" />
+    <result column="stud_idcard" property="studIdcard" jdbcType="VARCHAR" />
+    <result column="stud_num" property="studNum" jdbcType="VARCHAR" />
+    <result column="stud_bron" property="studBron" jdbcType="DATE" />
+    <result column="stud_banknum" property="studBanknum" jdbcType="VARCHAR" />
+    <result column="stud_nation" property="studNation" jdbcType="VARCHAR" />
+    <result column="stud_dorimitory" property="studDorimitory" jdbcType="VARCHAR" />
+    <result column="stud_parentname" property="studParentname" jdbcType="VARCHAR" />
+    <result column="stud_parenttel" property="studParenttel" jdbcType="VARCHAR" />
+     <result column="grad_name" property="gradName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="New_List" >
+    stud_id, stud_gradeid, stud_name, stud_sex, stud_age, stud_tel, stud_qq, stud_address, 
+    stud_idcard, stud_num, stud_bron, stud_banknum, stud_nation, stud_dorimitory, stud_parentname, 
+    stud_parenttel,grad_name
+  </sql>
+  
+  <select id="selectByStudNum" resultMap="NewResultMap" parameterType="java.lang.String">
+    <!--select 
+    <include refid="New_List" />
+    from student,grade
     where stud_num = #{studNum,jdbcType=VARCHAR}
+    and grade.grad_id=student.stud_gradeid  -->
+    
+    SELECT *
+	from student s,grade g
+	where s.stud_num=#{studNum,jdbcType=VARCHAR}
+	and g.grad_id=s.stud_gradeid
   </select>
   <insert id="insertOneStudent" parameterType="sixth.sixthgroup.model.Student" >
     insert into student (stud_id, stud_gradeid, stud_name, 
