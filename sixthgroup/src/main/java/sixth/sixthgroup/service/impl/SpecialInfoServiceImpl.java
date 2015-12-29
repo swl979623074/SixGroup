@@ -34,4 +34,11 @@ public class SpecialInfoServiceImpl implements SpecialInfoService {
 		return key;
 	}
 
+	public int updateByPrimaryKey(SpecialInfo record) {
+		// TODO Auto-generated method stub
+		int key=0;
+		key=this.specialInfoMapper.updateByPrimaryKey(record);
+		return key;
+	}
+
 }

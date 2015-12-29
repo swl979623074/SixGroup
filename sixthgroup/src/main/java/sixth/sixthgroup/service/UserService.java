@@ -1,5 +1,8 @@
 package sixth.sixthgroup.service;
 
+import java.util.List;
+
+import sixth.sixthgroup.model.ClassAccount;
 import sixth.sixthgroup.model.User;
 
 public interface UserService {
@@ -21,4 +24,9 @@ public interface UserService {
 	 * @return
 	 */
 	public int insertUser(User user)throws Exception;
+	/**
+	 * 查找所有班级账号
+	 * @return
+	 */
+	public List<ClassAccount> selectAll();
 }

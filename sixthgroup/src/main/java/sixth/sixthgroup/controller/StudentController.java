@@ -74,6 +74,46 @@ public class StudentController {
 	}
 	
 	/**
+	 * 通过班级id获取学生
+	 * @param gradeId 班级id
+	 * @return
+	 */
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/selectByGradeid")
+	public ModelAndView selectByGradeid(int gradeId,HttpServletRequest request,HttpServletResponse response) {
+	    ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			System.out.println("**************");
+			List<Student> list=this.studentService.getByGradeid(gradeId);
+			List<Student> studList = new ArrayList();
+			int len=list.size();
+			for(int i=0;i<len;i++){
+				Student test = new Student();
+				test=list.get(i);
+				if(test.getStudBron()!=null){
+					test.setBothTime(DATE_FORMAT.format(test.getStudBron()));
+				}
+				studList.add(test);
+			}
+			if(len>0){
+				map.put("result", Boolean.TRUE);
+				map.put("studList", studList);
+			}else{
+				map.put("result", Boolean.FALSE);
+			}
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
+	/**
 	 * 根据学号获取一个学生
 	 * @param studNum 学号
 	 * @return student

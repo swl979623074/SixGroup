@@ -51,5 +51,10 @@ public class StudentServiceImpl implements StudentService {
 		studetn=this.studentMapper.selectByPrimaryKey(studId);
 		return studetn;
 	}
+	public List<Student> getByGradeid(int gradeid) {
+		// TODO Auto-generated method stub
+		List<Student> list=this.studentMapper.selectByGradeId(gradeid);
+		return list;
+	}
 	
 }

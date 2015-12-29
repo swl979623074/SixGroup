@@ -1,6 +1,7 @@
 package sixth.sixthgroup.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import sixth.sixthgroup.model.ClassAccount;
 import sixth.sixthgroup.model.Grade;
 import sixth.sixthgroup.model.Student;
 import sixth.sixthgroup.model.User;
@@ -238,6 +240,36 @@ public class UserController {
         	map.put("password",user.getUserPassword());
         	map.put("userName",student.getStudName());
     	
+    	} catch (Exception e) {
+    		map.put("result", Boolean.FALSE);
+    		e.printStackTrace();
+    	}finally{
+    		view.setAttributesMap(map);
+    		mav.setView(view);
+    		return mav;
+    	}
+    }
+    
+    /**
+     * 查找所有的班级账号信息（即权限为学生的账号信息，默认学生为1）
+     * @return
+     */
+    @SuppressWarnings({ "finally", "unchecked" })
+    @RequestMapping("/selectAll")
+    public ModelAndView selectAll(HttpServletRequest request,HttpServletResponse response) {
+        	ModelAndView mav = new ModelAndView();
+    	MappingJacksonJsonView view = new MappingJacksonJsonView();
+    	@SuppressWarnings("rawtypes")
+    	Map map = new HashMap();
+    	try {
+    		List<ClassAccount> list=this.userService.selectAll();
+    		if(list.size()>0){
+    			map.put("result", Boolean.TRUE);
+    			map.put("ClassAccountList", list);
+    		}else{
+    			map.put("result", Boolean.FALSE);
+    			map.put("message", "不存在班级账号");
+    		}
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();

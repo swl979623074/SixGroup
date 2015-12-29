@@ -229,6 +229,17 @@
     from student
   </select>
   
+   <select id="selectByGradeId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<!--   select 
+    <include refid="Base_Column_List" />
+    from student
+    where stud_gradeid = #{studGradeid,jdbcType=INTEGER} -->  
+    
+    select *
+	from student s
+	where s.stud_gradeid=#{studGradeid,jdbcType=INTEGER}
+  </select>
+  
   <resultMap id="NewResultMap" type="sixth.sixthgroup.model.Student" >
     <id column="stud_id" property="studId" jdbcType="INTEGER" />
     <result column="stud_gradeid" property="studGradeid" jdbcType="INTEGER" />
@@ -255,12 +266,6 @@
   </sql>
   
   <select id="selectByStudNum" resultMap="NewResultMap" parameterType="java.lang.String">
-    <!--select 
-    <include refid="New_List" />
-    from student,grade
-    where stud_num = #{studNum,jdbcType=VARCHAR}
-    and grade.grad_id=student.stud_gradeid  -->
-    
     SELECT *
 	from student s,grade g
 	where s.stud_num=#{studNum,jdbcType=VARCHAR}

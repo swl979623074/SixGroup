@@ -1,9 +1,12 @@
 package sixth.sixthgroup.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sixth.sixthgroup.dao.UserMapper;
+import sixth.sixthgroup.model.ClassAccount;
 import sixth.sixthgroup.model.User;
 import sixth.sixthgroup.service.UserService;
 
@@ -96,6 +99,11 @@ public class UserServiceImpl implements UserService {
 			key=this.userMapper.insert(user);
 		}
 		return key;
+	}
+	public List<ClassAccount> selectAll() {
+		// TODO Auto-generated method stub
+		List<ClassAccount> list=this.userMapper.selectAll();
+		return list;
 	}
 	
 }

@@ -35,6 +35,8 @@ public class SpecialInfoController {
 	/**
 	 * 查找某一类型的特殊信息
 	 * @param typeId 特殊信息id
+	 * @param pageNum 
+	 * @param pageSize 
 	 * @return
 	 */
 	@SuppressWarnings({ "finally", "unchecked" })
@@ -85,6 +87,56 @@ public class SpecialInfoController {
 			return mav;
 		}
 	}
+	
+	/**
+	 * 获取辅导员对某一类型信息未读的条目数
+	 * @param typeId
+	 * @return
+	 */
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/getTheCount")
+	public ModelAndView getTheCount(int typeId, HttpServletRequest request,HttpServletResponse response) {
+	    	ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			List<SpecialInfo> list =new ArrayList();
+			list=this.specialInfoService.selectByInfoType(typeId);
+			
+			int len=list.size();
+			int key=0;
+			for(int i=0;i<len;i++){
+				if(list.get(i).getSpinIsread()==0){
+					key++;
+					
+					SpecialInfo obj=new SpecialInfo();
+					obj=list.get(i);
+					obj.setSpinId(list.get(i).getSpinId());
+					obj.setSpinIsread(1);
+					this.specialInfoService.updateByPrimaryKey(obj);
+				}
+			}
+			
+			if(key>0){
+				map.put("result", Boolean.TRUE);
+				map.put("num", key);
+			}else{
+				map.put("result", Boolean.FALSE);
+				map.put("num", "未查询到结果");
+			}
+			
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
+	
+	
 	/**
 	 * 添加一条特殊信息
 	 * @param studentId 学生id

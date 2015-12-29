@@ -6,9 +6,10 @@
     <result column="spin_studentid" property="spinStudentid" jdbcType="INTEGER" />
     <result column="spin_classno" property="spinClassno" jdbcType="INTEGER" />
      <result column="spin_time" property="spinTime" jdbcType="DATE" />
+      <result column="spin_isread" property="spinIsread" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    spin_id, spin_studentid, spin_classno,spin_time
+    spin_id, spin_studentid, spin_classno,spin_time,spin_isread
   </sql>
   
   
@@ -68,15 +69,14 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="sixth.sixthgroup.model.SpecialInfo" >
     update specialinfo
-    set spin_studentid = #{spinStudentid,jdbcType=INTEGER},
-      spin_classno = #{spinClassno,jdbcType=INTEGER}
+    set spin_isread=#{spinIsread,jdbcType=INTEGER}
     where spin_id = #{spinId,jdbcType=INTEGER}
   </update>
   
   
   <!-- 自己写的方法 -->
   <sql id="New_List" >
-    stud_name, stud_num,spin_time,grad_name,stud_tel,stud_dorimitory
+    stud_name, stud_num,spin_time,grad_name,stud_tel,stud_dorimitory,spin_isread,spin_id
   </sql>
   
   <resultMap id="NewMap" type="sixth.sixthgroup.model.SpecialInfo" >
@@ -86,6 +86,8 @@
   	<result column="grad_name" property="gradName" jdbcType="VARCHAR" />
   	<result column="stud_tel" property="studTel" jdbcType="VARCHAR" />
   	<result column="stud_dorimitory" property="studDorimitory" jdbcType="DATE" />
+  	<result column="spin_isread" property="spinIsread" jdbcType="INTEGER" />
+  	<result column="spin_id" property="spinId" jdbcType="INTEGER" />
   </resultMap>
   <select id="selectByInfoType" resultMap="NewMap" parameterType="java.lang.Integer" >
     select
@@ -93,7 +95,6 @@
 	from student st,specialinfo sp,grade gr
 	where sp.spin_classno=#{spinClassno,jdbcType=INTEGER}
 	and sp.spin_studentid=st.stud_id
-	and gr.grad_id=st.stud_gradeid
-	GROUP BY st.stud_id;
+	and gr.grad_id=st.stud_gradeid;
   </select>
 </mapper>

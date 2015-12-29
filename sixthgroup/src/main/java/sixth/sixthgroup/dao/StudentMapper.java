@@ -34,4 +34,10 @@ public interface StudentMapper {
      * @return
      */
     Student insertOneStudent(Student student);
+    /**
+     * 通过班级id获取班级的学生
+     * @param studGradeid
+     * @return
+     */
+    List<Student> selectByGradeId(Integer studGradeid);
 }

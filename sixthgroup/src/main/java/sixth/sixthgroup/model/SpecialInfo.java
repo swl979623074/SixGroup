@@ -11,6 +11,8 @@ public class SpecialInfo {
 
     private Date spinTime;
     
+    private Integer spinIsread;
+    
     private String studName;
     
     private String studNum;
@@ -23,6 +25,14 @@ public class SpecialInfo {
     
     String time;
     
+	public Integer getSpinIsread() {
+		return spinIsread;
+	}
+
+	public void setSpinIsread(Integer spinIsread) {
+		this.spinIsread = spinIsread;
+	}
+
 	public String getTime() {
 		return time;
 	}

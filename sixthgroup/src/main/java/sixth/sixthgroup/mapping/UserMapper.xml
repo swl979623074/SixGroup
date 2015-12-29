@@ -99,4 +99,21 @@
     where user_name = #{userName,jdbcType=VARCHAR}
           and user_password = #{userPassword,jdbcType=VARCHAR}
   </select>
+  
+  <resultMap id="NewResultMap" type="sixth.sixthgroup.model.ClassAccount" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="grad_id" property="gradId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+  	<result column="grad_name" property="gradName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="New_Column_List" >
+    user_id,grad_id,user_name, user_password, grad_name
+  </sql>
+  
+  <select id="selectAll" resultMap="NewResultMap" parameterType="sixth.sixthgroup.model.ClassAccount">
+  	select us.user_id,g.grad_id,us.user_name,us.user_password,g.grad_name
+	from user us,grade g
+	where us.user_power=1 and us.user_belong=g.grad_id;
+  </select>
 </mapper>

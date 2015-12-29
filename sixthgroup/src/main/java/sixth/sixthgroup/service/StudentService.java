@@ -28,4 +28,10 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student getOneStudentById(int studId);
+	/**
+	 * 通过班级id获取学生
+	 * @param gradeid
+	 * @return
+	 */
+	public List<Student> getByGradeid(int gradeid);
 }

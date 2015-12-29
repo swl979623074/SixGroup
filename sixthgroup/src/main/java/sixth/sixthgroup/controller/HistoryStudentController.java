@@ -51,6 +51,7 @@ public class HistoryStudentController {
 			List<HistoryStudent> list=this.historyStudentService.selectPeopleToHold();
 			int len=list.size();
 			if(len<num){
+				System.out.println(len);
 				map.put("result", Boolean.FALSE);
 				map.put("message", "人员数不足");
 			}else{
