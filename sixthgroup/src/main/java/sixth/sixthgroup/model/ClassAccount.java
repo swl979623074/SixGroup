@@ -1,6 +1,7 @@
 package sixth.sixthgroup.model;
 
 public class ClassAccount {
+	
 	private Integer userId;
 	 
 	private String gradName;
