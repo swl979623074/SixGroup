@@ -16,4 +16,11 @@ public interface OperationLogService {
 	 * @return
 	 */
 	List<OperationLog> selectByPeopleId(int oploPeopleid);
+	
+	/**
+	 * 增加一台操作记录
+	 * @param record 操作日志
+	 * @return
+	 */
+	public int insertOne(OperationLog record);
 }

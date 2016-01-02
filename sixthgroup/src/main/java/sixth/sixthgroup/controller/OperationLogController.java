@@ -2,6 +2,7 @@ package sixth.sixthgroup.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,45 @@ public class OperationLogController {
 			}else{
 				map.put("result", Boolean.FALSE);
 				map.put("maxPage", maxPage);
+			}
+			
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
+	
+	/**
+	 * 添加一条操作日志
+	 * @param userId 操作者的id
+	 * @param content 操作内容
+	 * @return
+	 */
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/insertOne")
+	public ModelAndView insertOne(int userId,String content, HttpServletRequest request,HttpServletResponse response) {
+	    	ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			Date date=new Date();
+			
+			OperationLog obj = new OperationLog();
+			obj.setOploPeopleid(userId);
+			obj.setOploContent(content);
+			obj.setOploTime(date);
+			
+			int key=0;
+			key=this.operationLogService.insertOne(obj);
+			if(key!=0){
+				map.put("result", Boolean.TRUE);
+			}else{
+				map.put("result", Boolean.FALSE);
 			}
 			
 		} catch (Exception e) {

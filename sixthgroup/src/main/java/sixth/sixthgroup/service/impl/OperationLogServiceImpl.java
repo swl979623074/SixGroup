@@ -30,5 +30,11 @@ public class OperationLogServiceImpl implements OperationLogService {
 		List<OperationLog> list=this.OperationLogMapper.selectByPeopleId(oploPeopleid);
 		return list;
 	}
+	public int insertOne(OperationLog record) {
+		// TODO Auto-generated method stub
+		int key=0;
+		key=this.OperationLogMapper.insert(record);
+		return key;
+	}
 
 }
