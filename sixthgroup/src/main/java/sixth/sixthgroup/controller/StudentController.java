@@ -222,7 +222,7 @@ public class StudentController {
 	 */
 	@SuppressWarnings({ "finally", "unchecked" })
 	@RequestMapping("/deleteOne")
-	public ModelAndView deleteOne(int studNum, HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView deleteOne(String studNum, HttpServletRequest request,HttpServletResponse response) {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
@@ -279,8 +279,7 @@ public class StudentController {
 		Map map = new HashMap();
 		try {
 			Student student = new Student();
-			student = this.studentService.getOneStudent(studNum);
-			if(student != null){
+			
 				java.util.Date date=DATE_FORMAT.parse(studBron);  
 			
 				student.setStudAddress(studAddress);
@@ -308,10 +307,6 @@ public class StudentController {
 					//可能是外键studGradeid引起的
 					map.put("message","更新操作发生异常" );
 				}
-			}else{
-				map.put("result", Boolean.FALSE);
-				map.put("message","通过该学号无法查到被修改的学生" );
-			}
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();

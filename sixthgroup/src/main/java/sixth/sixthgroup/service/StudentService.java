@@ -39,7 +39,7 @@ public interface StudentService {
 	 * @param studNum
 	 * @return
 	 */
-	public int deleteOne(int studNum);
+	public int deleteOne(String studNum);
 	/**
 	 * 通过学生id修改学生信息
 	 * @param record

@@ -123,4 +123,20 @@
 	where grade.grad_monitor = user.user_id
 	and grade.grad_id = #{gradId,jdbcType=INTEGER};
   </delete>
+  
+  <update id="updateOne">
+    UPDATE user
+	set user.user_belong = (
+	SELECT student.stud_id
+	from student
+	where student.stud_num ="20130004"
+	),
+	user.user_name = #{userName,jdbcType=VARCHAR} ,
+	user.user_password = #{userPassword,jdbcType=VARCHAR}
+	where user.user_id = (
+	select gr.grad_monitor
+	from grade gr
+	where gr.grad_id=5
+	)
+  </update>
 </mapper>

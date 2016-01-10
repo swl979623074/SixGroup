@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
 		List<Student> list=this.studentMapper.selectByGradeId(gradeid);
 		return list;
 	}
-	public int deleteOne(int studNum) {
+	public int deleteOne(String studNum) {
 		// TODO Auto-generated method stub
 		int key = 0;
 		key = this.studentMapper.deleteByStudNum(studNum);

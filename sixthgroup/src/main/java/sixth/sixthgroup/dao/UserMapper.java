@@ -33,4 +33,13 @@ public interface UserMapper {
      * @return
      */
     int deleteOne(Integer gardId);
+    /**
+     * 修改一个班级账号信息
+     * @param gradId
+     * @param studNum
+     * @param userName
+     * @param userPassword
+     * @return
+     */
+    int updateOne(Integer gradId,String studNum,String userName,String userPassword);
 }

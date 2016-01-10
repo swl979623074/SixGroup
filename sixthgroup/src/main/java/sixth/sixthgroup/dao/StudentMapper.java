@@ -45,5 +45,5 @@ public interface StudentMapper {
      * @param studNum  学号
      * @return 
      */
-    int deleteByStudNum(Integer studNum);
+    int deleteByStudNum(String studNum);
 }

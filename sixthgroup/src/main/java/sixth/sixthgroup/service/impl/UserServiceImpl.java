@@ -111,5 +111,12 @@ public class UserServiceImpl implements UserService {
 		key = this.userMapper.deleteOne(gradId);
 		return key;
 	}
+	public int updateOne(int gradId, String studNum, String userName,
+			String userPassword) {
+		// TODO Auto-generated method stub
+		int key = 0;
+		key = this.userMapper.updateOne(gradId, studNum, userName, userPassword);
+		return key;
+	}
 	
 }

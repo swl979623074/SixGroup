@@ -219,7 +219,7 @@
       stud_dorimitory = #{studDorimitory,jdbcType=VARCHAR},
       stud_parentname = #{studParentname,jdbcType=VARCHAR},
       stud_parenttel = #{studParenttel,jdbcType=VARCHAR}
-    where stud_id = #{studId,jdbcType=INTEGER}
+    where stud_num = #{studNum,jdbcType=VARCHAR}
   </update>
   
    <!-- 自己写的方法 -->
@@ -284,8 +284,8 @@
       #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR})
   </insert>
   
-  <delete id="deleteByStudNum" parameterType="java.lang.Integer" >
+  <delete id="deleteByStudNum" parameterType="java.lang.String" >
     delete from student
-    where stud_num = #{studNum,jdbcType=INTEGER}
+    where stud_num = #{studNum,jdbcType=VARCHAR}
   </delete>
 </mapper>
