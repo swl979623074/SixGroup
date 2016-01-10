@@ -1,6 +1,8 @@
 package sixth.sixthgroup.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -114,8 +116,14 @@ public class UserServiceImpl implements UserService {
 	public int updateOne(int gradId, String studNum, String userName,
 			String userPassword) {
 		// TODO Auto-generated method stub
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("gradId", gradId);
+		params.put("studNum", studNum);
+		params.put("userName", userName);
+		params.put("userPassword", userPassword);
+		
 		int key = 0;
-		key = this.userMapper.updateOne(gradId, studNum, userName, userPassword);
+		key = this.userMapper.updateOne(params);
 		return key;
 	}
 	

@@ -310,4 +310,48 @@ public class UserController {
     		return mav;
     	}
     }
+    
+    @SuppressWarnings({ "finally", "unchecked" })
+    @RequestMapping("/updateOne")
+    public ModelAndView updateOne(int gradId, String studNum, String userName,
+			String userPassword, HttpServletRequest request,HttpServletResponse response) {
+        	ModelAndView mav = new ModelAndView();
+    	MappingJacksonJsonView view = new MappingJacksonJsonView();
+    	@SuppressWarnings("rawtypes")
+    	Map map = new HashMap();
+    	try {
+    		Grade grade = new Grade();
+    		grade = this.gradeService.selectByClassId(gradId);
+    		
+    		Student student = new Student();
+    		student = this.studentService.getOneStudent(studNum);
+    		
+    		if(grade == null){
+    			map.put("result", Boolean.FALSE);
+        		map.put("message", "该班级不存在");
+    		}else if(grade.getGradMonitor() == null){
+    			map.put("result", Boolean.FALSE);
+        		map.put("message", "该班级不存在班级账号");
+    		}else if(student == null){
+    			map.put("result", Boolean.FALSE);
+        		map.put("message", "该学生不存在");
+    		}else{
+    			int key = 0;
+    			key = this.userService.updateOne(gradId, studNum, userName, userPassword);
+    			if(key != 0){
+    				map.put("result", Boolean.TRUE);
+    			}else{
+    				map.put("result", Boolean.FALSE);
+    				map.put("message","更新操作发生异常");
+    			}
+    		}
+    	} catch (Exception e) {
+    		map.put("result", Boolean.FALSE);
+    		e.printStackTrace();
+    	}finally{
+    		view.setAttributesMap(map);
+    		mav.setView(view);
+    		return mav;
+    	}
+    }
 }

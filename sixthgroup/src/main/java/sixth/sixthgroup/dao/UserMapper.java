@@ -1,6 +1,7 @@
 package sixth.sixthgroup.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import sixth.sixthgroup.model.ClassAccount;
 import sixth.sixthgroup.model.User;
@@ -41,5 +42,8 @@ public interface UserMapper {
      * @param userPassword
      * @return
      */
-    int updateOne(Integer gradId,String studNum,String userName,String userPassword);
+    
+  //  int updateOne(Integer gradId,String studNum,String userName,String userPassword);
+    
+    int updateOne(Map<String, Object> params);
 }
