@@ -23,4 +23,10 @@ public interface SpecialInfoService {
 	  * @return
 	  */
 	 public int updateByPrimaryKey(SpecialInfo record);
+	 /**
+	  * 通过id删除一条特殊信息记录
+	  * @param spinId
+	  * @return
+	  */
+	 public int deleteOne(int spinId);
 }

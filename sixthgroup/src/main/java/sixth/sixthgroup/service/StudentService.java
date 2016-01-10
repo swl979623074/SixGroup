@@ -34,4 +34,16 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<Student> getByGradeid(int gradeid);
+	/**
+	 * 通过学号删除一个学生
+	 * @param studNum
+	 * @return
+	 */
+	public int deleteOne(int studNum);
+	/**
+	 * 通过学生id修改学生信息
+	 * @param record
+	 * @return
+	 */
+	public int updateOne(Student record);
 }

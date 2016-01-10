@@ -56,5 +56,17 @@ public class StudentServiceImpl implements StudentService {
 		List<Student> list=this.studentMapper.selectByGradeId(gradeid);
 		return list;
 	}
+	public int deleteOne(int studNum) {
+		// TODO Auto-generated method stub
+		int key = 0;
+		key = this.studentMapper.deleteByStudNum(studNum);
+		return key;
+	}
+	public int updateOne(Student record) {
+		// TODO Auto-generated method stub
+		int key = 0 ;
+		key = this.studentMapper.updateByPrimaryKey(record);
+		return key;
+	}
 	
 }

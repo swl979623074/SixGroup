@@ -177,4 +177,30 @@ public class SpecialInfoController {
 			return mav;
 		}
 	}
+	
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/deleteOne")
+	public ModelAndView deleteOne(int spinId, HttpServletRequest request,HttpServletResponse response) {
+	    	ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			int key = 0;
+			key = this.specialInfoService.deleteOne(spinId);
+			if(key != 0){
+				map.put("result", Boolean.TRUE);
+			}else{
+				map.put("result", Boolean.FALSE);
+				map.put("message","id不存在" );
+			}
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
 }

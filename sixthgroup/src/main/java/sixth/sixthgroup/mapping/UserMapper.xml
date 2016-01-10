@@ -114,6 +114,13 @@
   <select id="selectAll" resultMap="NewResultMap" parameterType="sixth.sixthgroup.model.ClassAccount">
   	select us.user_id,g.grad_id,us.user_name,us.user_password,g.grad_name
 	from user us,grade g
-	where us.user_power=1 and us.user_belong=g.grad_id;
+	where g.grad_monitor = us.user_id;
   </select>
+  
+  <delete id="deleteOne" parameterType="java.lang.Integer" >
+    delete user
+	from grade,user
+	where grade.grad_monitor = user.user_id
+	and grade.grad_id = #{gradId,jdbcType=INTEGER};
+  </delete>
 </mapper>

@@ -214,4 +214,111 @@ public class StudentController {
 			return mav;
 		}
 	}
+	
+	/**
+	 * 通过学号删除一个学生
+	 * @param studNum
+	 * @return
+	 */
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/deleteOne")
+	public ModelAndView deleteOne(int studNum, HttpServletRequest request,HttpServletResponse response) {
+	    	ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			int key = this.studentService.deleteOne(studNum);
+			if(key != 0){
+				map.put("result", Boolean.TRUE);
+			}else{
+				map.put("result", Boolean.FALSE);
+				map.put("message","学号不存在或发生异常" );
+			}
+			
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
+	
+	/**
+	 * 修改一个学生的信息
+	 * @param studGradeid
+	 * @param studName
+	 * @param studSex
+	 * @param studAge
+	 * @param studTel
+	 * @param studQq
+	 * @param studAddress
+	 * @param studIdcard
+	 * @param studNum
+	 * @param studBron
+	 * @param studBanknum
+	 * @param studNation
+	 * @param studDorimitory
+	 * @param studParentname
+	 * @param studParenttel
+	 * @return
+	 */
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping("/updateOne")
+	public ModelAndView updateOne(int studGradeid,String studName,String studSex,
+			String studAge,String studTel,String studQq,
+			String studAddress,String studIdcard,String studNum,
+			String studBron,String studBanknum,String studNation,
+			String studDorimitory,String studParentname,String studParenttel,
+			HttpServletRequest request,HttpServletResponse response) {
+	    	ModelAndView mav = new ModelAndView();
+		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		@SuppressWarnings("rawtypes")
+		Map map = new HashMap();
+		try {
+			Student student = new Student();
+			student = this.studentService.getOneStudent(studNum);
+			if(student != null){
+				java.util.Date date=DATE_FORMAT.parse(studBron);  
+			
+				student.setStudAddress(studAddress);
+				student.setStudAge(studAge);
+				student.setStudBanknum(studBanknum);
+				student.setStudBron(date);
+				student.setStudDorimitory(studDorimitory);
+				student.setStudGradeid(studGradeid);
+				student.setStudIdcard(studIdcard);
+				student.setStudName(studName);
+				student.setStudNation(studNation);
+				student.setStudNum(studNum);
+				student.setStudQq(studQq);
+				student.setStudSex(studSex);
+				student.setStudTel(studTel);
+				student.setStudParentname(studParentname);
+				student.setStudParenttel(studParenttel);
+				
+				int key = 0 ;
+				key = this.studentService.updateOne(student);
+				if(key != 0){
+					map.put("result", Boolean.TRUE);
+				}else{
+					map.put("result", Boolean.FALSE);
+					//可能是外键studGradeid引起的
+					map.put("message","更新操作发生异常" );
+				}
+			}else{
+				map.put("result", Boolean.FALSE);
+				map.put("message","通过该学号无法查到被修改的学生" );
+			}
+		} catch (Exception e) {
+			map.put("result", Boolean.FALSE);
+			e.printStackTrace();
+		}finally{
+			view.setAttributesMap(map);
+			mav.setView(view);
+			return mav;
+		}
+	}
 }

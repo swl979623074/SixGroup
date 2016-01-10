@@ -29,4 +29,9 @@ public interface UserService {
 	 * @return
 	 */
 	public List<ClassAccount> selectAll();
+	/**
+	 * 通过班级id删除班级账号，这个班级还是存在的
+	 * @param gradId
+	 */
+	public int deleteOne(int gradId);
 }

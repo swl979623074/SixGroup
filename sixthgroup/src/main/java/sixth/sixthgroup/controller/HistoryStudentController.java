@@ -115,6 +115,7 @@ public class HistoryStudentController {
 			if(studList.size()>0){
 				map.put("result", Boolean.TRUE);
 				map.put("studList", studList);
+				map.put("maxPage", maxPage);
 			}else{
 				map.put("result", Boolean.FALSE);
 			}	

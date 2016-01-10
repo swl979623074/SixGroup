@@ -41,4 +41,11 @@ public class SpecialInfoServiceImpl implements SpecialInfoService {
 		return key;
 	}
 
+	public int deleteOne(int spinId) {
+		// TODO Auto-generated method stub
+		int key = 0;
+		key = this.specialInfoMapper.deleteByPrimaryKey(spinId);
+		return key;
+	}
+
 }

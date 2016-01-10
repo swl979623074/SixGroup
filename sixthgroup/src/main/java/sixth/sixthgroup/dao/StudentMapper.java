@@ -16,7 +16,7 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
-	 /**** 自己写的方法*******/
+	
     /**
      * 获取所有学生的详细信息
      * @return
@@ -40,4 +40,10 @@ public interface StudentMapper {
      * @return
      */
     List<Student> selectByGradeId(Integer studGradeid);
+    /**
+     * 通过学号删除一个学生
+     * @param studNum  学号
+     * @return 
+     */
+    int deleteByStudNum(Integer studNum);
 }

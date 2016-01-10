@@ -18,5 +18,10 @@ public interface SpecialInfoMapper {
     int updateByPrimaryKey(SpecialInfo record);
     
     /** 自己写的方法**/
+    /**
+     * 获取特殊信息列表
+     * @param spinClassno
+     * @return
+     */
     List<SpecialInfo> selectByInfoType(Integer spinClassno);
 }

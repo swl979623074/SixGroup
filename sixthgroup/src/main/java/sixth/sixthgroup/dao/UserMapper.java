@@ -27,4 +27,10 @@ public interface UserMapper {
      * @return
      */
     List<ClassAccount> selectAll();
+    /**
+     * 通过班级id删除一个班级
+     * @param gardId
+     * @return
+     */
+    int deleteOne(Integer gardId);
 }

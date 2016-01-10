@@ -32,7 +32,9 @@ public class AcademyServiceImpl implements AcademyService {
 		int key=0;
 		Academy academy=new Academy();
 		academy=this.academyMapper.selectByName(name);
-		key=academy.getAcadId();
+		if(academy !=null){
+			key=academy.getAcadId();
+		}
 		return key;
 	}
 

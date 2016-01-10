@@ -105,5 +105,11 @@ public class UserServiceImpl implements UserService {
 		List<ClassAccount> list=this.userMapper.selectAll();
 		return list;
 	}
+	public int deleteOne(int gradId) {
+		// TODO Auto-generated method stub
+		int key =0;
+		key = this.userMapper.deleteOne(gradId);
+		return key;
+	}
 	
 }

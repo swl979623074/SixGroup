@@ -283,4 +283,9 @@
       #{studNum,jdbcType=INTEGER}, #{studBron,jdbcType=DATE}, #{studBanknum,jdbcType=INTEGER}, 
       #{studNation,jdbcType=VARCHAR}, #{studDorimitory,jdbcType=VARCHAR})
   </insert>
+  
+  <delete id="deleteByStudNum" parameterType="java.lang.Integer" >
+    delete from student
+    where stud_num = #{studNum,jdbcType=INTEGER}
+  </delete>
 </mapper>

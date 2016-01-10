@@ -279,4 +279,35 @@ public class UserController {
     		return mav;
     	}
     }
+    
+    /**
+     * 通过班级id删除班级账号
+     * @param gradId 班级id
+     * @return
+     */
+    @SuppressWarnings({ "finally", "unchecked" })
+    @RequestMapping("/deleteOne")
+    public ModelAndView deleteOne(int gradId, HttpServletRequest request,HttpServletResponse response) {
+        	ModelAndView mav = new ModelAndView();
+    	MappingJacksonJsonView view = new MappingJacksonJsonView();
+    	@SuppressWarnings("rawtypes")
+    	Map map = new HashMap();
+    	try {
+    		int key = 0;
+    		key = this.userService.deleteOne(gradId);
+    		if(key != 0){
+    			map.put("result", Boolean.TRUE);
+    		}else{
+    			map.put("result", Boolean.TRUE);
+    			map.put("message","班级账号不存在" );
+    		}
+    	} catch (Exception e) {
+    		map.put("result", Boolean.FALSE);
+    		e.printStackTrace();
+    	}finally{
+    		view.setAttributesMap(map);
+    		mav.setView(view);
+    		return mav;
+    	}
+    }
 }
