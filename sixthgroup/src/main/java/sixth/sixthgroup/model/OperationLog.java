@@ -12,8 +12,18 @@ public class OperationLog {
     private Date oploTime;
     
     private String time;
+    
+    private String studName;
 
-    public String getTime() {
+    public String getStudName() {
+		return studName;
+	}
+
+	public void setStudName(String studName) {
+		this.studName = studName;
+	}
+
+	public String getTime() {
 		return time;
 	}
 

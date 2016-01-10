@@ -81,11 +81,23 @@
   </update>
   
   <!-- 自己写的方法 -->
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <resultMap id="newMap" type="sixth.sixthgroup.model.OperationLog" >
+    <id column="oplo_id" property="oploId" jdbcType="INTEGER" />
+    <result column="oplo_peopleid" property="oploPeopleid" jdbcType="INTEGER" />
+    <result column="oplo_content" property="oploContent" jdbcType="VARCHAR" />
+    <result column="oplo_time" property="oploTime" jdbcType="DATE" />
+    <result column="stud_name" property="studName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="newList" >
+    oplo_id, oplo_peopleid, oplo_content, oplo_time,stud_name
+  </sql>
+  
+  <select id="selectAll" resultMap="newMap" >
     select 
-    <include refid="Base_Column_List" />
-    from operationlog
-    ORDER BY oplo_time desc
+    <include refid="newList" />
+    from operationlog,student
+	where student.stud_id=operationlog.oplo_peopleid
+	ORDER BY oplo_time desc
   </select>
   <select id="selectByPeopleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
