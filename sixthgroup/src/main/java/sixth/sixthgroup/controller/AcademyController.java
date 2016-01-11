@@ -29,6 +29,14 @@ public class AcademyController {
 		this.academyService = academyService;
 	}
 	
+	private String tmp;
+	
+	public String getTmp() {
+		return tmp;
+	}
+	public void setTmp(String tmp) {
+		this.tmp = tmp;
+	}
 	/**
 	 * 获取学院列表
 	 * @return {"result":true,"AcademyList":[{"acadId":1,"acadName":"计算机科学与技术学院"},{"acadId":2,"acadName":"理学院"}]}
@@ -40,16 +48,21 @@ public class AcademyController {
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
+		//String tmp = null;
 		try {
+			
 			List<Academy> list = this.academyService.getAll();
 			map.put("result", Boolean.TRUE);
 			map.put("AcademyList", list);
+			tmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
+			tmp = "false";
 			e.printStackTrace();
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+			//mav.setViewName(tmp);
 			return mav;
 		}
 	}

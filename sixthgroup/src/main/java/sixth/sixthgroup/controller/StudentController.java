@@ -34,6 +34,15 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 	
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+	
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	/**
 	 * 获取所有学生
 	 * @return studentList
@@ -63,9 +72,11 @@ public class StudentController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -104,9 +115,11 @@ public class StudentController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -128,16 +141,18 @@ public class StudentController {
 		try {
 			Student student=new Student();
 			student=this.studentService.getOneStudent(studNum);
-			student.setBothTime(DATE_FORMAT.format(student.getStudBron()));
 			if(student!=null){
+				student.setBothTime(DATE_FORMAT.format(student.getStudBron()));
 				map.put("result", Boolean.TRUE);
 				map.put("student",student );
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -205,9 +220,11 @@ public class StudentController {
 				map.put("result", Boolean.FALSE);
 				map.put("message", "此学号已经存在");
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -235,10 +252,11 @@ public class StudentController {
 				map.put("result", Boolean.FALSE);
 				map.put("message","学号不存在或发生异常" );
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -307,9 +325,11 @@ public class StudentController {
 					//可能是外键studGradeid引起的
 					map.put("message","更新操作发生异常" );
 				}
+				bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);

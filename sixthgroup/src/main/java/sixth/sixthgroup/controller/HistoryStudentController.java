@@ -26,7 +26,16 @@ public class HistoryStudentController {
 			"yyyy-MM-dd");
 
 	private HistoryStudentService historyStudentService;
-
+	
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+	
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	public HistoryStudentService getHistoryStudentService() {
 		return historyStudentService;
 	}
@@ -46,6 +55,7 @@ public class HistoryStudentController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+	//	String bmp = null;
 		Map map = new HashMap();
 		try {
 			List<HistoryStudent> list=this.historyStudentService.selectPeopleToHold();
@@ -68,12 +78,15 @@ public class HistoryStudentController {
 				map.put("result", Boolean.TRUE);	
 				map.put("studList", studList);	
 			}	
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}
@@ -90,6 +103,7 @@ public class HistoryStudentController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+	//	String bmp = null;
 		Map map = new HashMap();
 		try {
 			List<HistoryStudent> list = this.historyStudentService.selectAll();
@@ -119,12 +133,15 @@ public class HistoryStudentController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}	
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}

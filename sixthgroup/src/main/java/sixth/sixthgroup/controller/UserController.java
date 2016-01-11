@@ -55,6 +55,16 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+	
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	/**
 	 * 通过id查找用户
 	 * @param id 用户的id
@@ -76,9 +86,11 @@ public class UserController {
     			map.put("result", Boolean.TRUE);
     			map.put("user", user);
     		}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -108,9 +120,11 @@ public class UserController {
     			map.put("result", Boolean.TRUE);
     			map.put("user", user);
     		}
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -139,10 +153,11 @@ public class UserController {
     		}else{
     			map.put("result", Boolean.FALSE);
     		}
-    		
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -198,10 +213,12 @@ public class UserController {
         		}else{
         			map.put("result", Boolean.FALSE);
         		}
-    		}				 		
+    		}		
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -239,10 +256,11 @@ public class UserController {
         	map.put("accountNumber",user.getUserName());
         	map.put("password",user.getUserPassword());
         	map.put("userName",student.getStudName());
-    	
+    	bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -270,9 +288,11 @@ public class UserController {
     			map.put("result", Boolean.FALSE);
     			map.put("message", "不存在班级账号");
     		}
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -301,9 +321,11 @@ public class UserController {
     			map.put("result", Boolean.TRUE);
     			map.put("message","班级账号不存在" );
     		}
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);
@@ -345,9 +367,11 @@ public class UserController {
     				map.put("message","更新操作发生异常");
     			}
     		}
+    		bmp = "true";
     	} catch (Exception e) {
     		map.put("result", Boolean.FALSE);
     		e.printStackTrace();
+    		bmp = "false";
     	}finally{
     		view.setAttributesMap(map);
     		mav.setView(view);

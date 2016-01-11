@@ -30,6 +30,16 @@ public class OperationLogController {
 	
 	private UserService userService;
 	
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -62,6 +72,7 @@ public class OperationLogController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+		//String bmp =null;
 		Map map = new HashMap();
 		try {
 			User user=new User();
@@ -101,13 +112,15 @@ public class OperationLogController {
 				map.put("result", Boolean.FALSE);
 				map.put("maxPage", maxPage);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+			//mav.setViewName(bmp);
 			return mav;
 		}
 	}
@@ -124,6 +137,7 @@ public class OperationLogController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+		//String bmp = null;
 		Map map = new HashMap();
 		try {
 			Date date=new Date();
@@ -140,13 +154,15 @@ public class OperationLogController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "fasle";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}

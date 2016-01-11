@@ -32,6 +32,16 @@ public class SpecialInfoController {
 	public void setSpecialInfoService(SpecialInfoService specialInfoService) {
 		this.specialInfoService = specialInfoService;
 	}
+	
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	/**
 	 * 查找某一类型的特殊信息
 	 * @param typeId 特殊信息id
@@ -77,10 +87,11 @@ public class SpecialInfoController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -125,10 +136,11 @@ public class SpecialInfoController {
 				map.put("result", Boolean.FALSE);
 				map.put("num", "未查询到结果");
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -167,10 +179,11 @@ public class SpecialInfoController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
@@ -194,9 +207,11 @@ public class SpecialInfoController {
 				map.put("result", Boolean.FALSE);
 				map.put("message","id不存在" );
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);

@@ -21,6 +21,15 @@ import sixth.sixthgroup.service.SpecialInfoClassService;
 public class SpecialInfoClassController {
 	private SpecialInfoClassService specialInfoClassService;
 
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+	
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	public SpecialInfoClassService getSpecialInfoClassService() {
 		return specialInfoClassService;
 	}
@@ -51,9 +60,11 @@ public class SpecialInfoClassController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);

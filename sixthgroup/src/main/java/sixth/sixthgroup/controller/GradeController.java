@@ -21,6 +21,15 @@ import sixth.sixthgroup.service.GradeService;
 public class GradeController {
 	private GradeService gradeService;
 
+	private String bmp;
+	
+	public String getBmp() {
+		return bmp;
+	}
+
+	public void setBmp(String bmp) {
+		this.bmp = bmp;
+	}
 	public GradeService getGradeService() {
 		return gradeService;
 	}
@@ -42,6 +51,7 @@ public class GradeController {
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
+		//String bmp = null;
 		try {
 			Grade grade= new Grade();
 			grade.setGradName(name);
@@ -55,13 +65,15 @@ public class GradeController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+			//mav.setViewName(bmp);
 			return mav;
 		}
 	}
@@ -77,6 +89,7 @@ public class GradeController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+	//	String bmp = null;
 		Map map = new HashMap();
 		try {
 			System.out.println(gradName);
@@ -88,13 +101,15 @@ public class GradeController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}
@@ -108,6 +123,7 @@ public class GradeController {
 	    	ModelAndView mav = new ModelAndView();
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
+	//	String bmp = null;
 		Map map = new HashMap();
 		try {
 			List<Grade> list=this.gradeService.selectAll();
@@ -117,13 +133,15 @@ public class GradeController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			bmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			bmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}

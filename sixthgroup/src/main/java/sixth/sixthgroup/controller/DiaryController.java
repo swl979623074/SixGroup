@@ -25,6 +25,15 @@ public class DiaryController {
 
 	private DiaryService diaryService;
 
+	private String tmp;
+	
+	public String getTmp() {
+		return tmp;
+	}
+	
+	public void setTmp(String tmp) {
+		this.tmp = tmp;
+	}
 	public DiaryService getDiaryService() {
 		return diaryService;
 	}
@@ -45,6 +54,7 @@ public class DiaryController {
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
+		//String tmp = null;
 		try {
 			java.util.Date date=DATE_FORMAT.parse(time);
 			
@@ -60,13 +70,16 @@ public class DiaryController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			tmp="true";
 			
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			tmp="false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+			//mav.setViewName(tmp);
 			return mav;
 		}
 	}
@@ -83,6 +96,7 @@ public class DiaryController {
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
+		//String bmp = null;
 		try {
 			int key = 0;
 			key=this.diaryService.deleteByPrimaryKey(id);
@@ -91,12 +105,15 @@ public class DiaryController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
+			tmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			tmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+		//	mav.setViewName(bmp);
 			return mav;
 		}
 	}
@@ -114,6 +131,7 @@ public class DiaryController {
 		MappingJacksonJsonView view = new MappingJacksonJsonView();
 		@SuppressWarnings("rawtypes")
 		Map map = new HashMap();
+		//String bmp = null;
 		try {
 			List<Diary> list=this.diaryService.selectAll();
 			List<Diary> diaryList = new ArrayList();
@@ -132,13 +150,15 @@ public class DiaryController {
 			}else{
 				map.put("result", Boolean.FALSE);
 			}
-			
+			tmp = "true";
 		} catch (Exception e) {
 			map.put("result", Boolean.FALSE);
 			e.printStackTrace();
+			tmp = "false";
 		}finally{
 			view.setAttributesMap(map);
 			mav.setView(view);
+			//mav.setViewName(bmp);
 			return mav;
 		}
 	}

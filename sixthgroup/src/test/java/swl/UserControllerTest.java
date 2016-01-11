@@ -12,9 +12,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 
+
+
 import com.alibaba.fastjson.JSON;
 
+import sixth.sixthgroup.model.Grade;
 import sixth.sixthgroup.model.User;
+import sixth.sixthgroup.service.GradeService;
 import sixth.sixthgroup.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,9 +31,9 @@ public class UserControllerTest {
 
 	@Autowired
 	private UserService userService;
-
-	
-	@Test
+	@Autowired
+	private GradeService gradeService;
+	/*@Test
 	public void testQueryById1() throws Exception {
 		User userInfo = userService.findUserById(1);
 		//LOGGER.info(JSON.toJSON(userInfo));
@@ -41,8 +45,17 @@ public class UserControllerTest {
 		exp.setUserPassword("123");
 		exp.setUserPower(1);
 		assertEquals(JSON.toJSON(userInfo),JSON.toJSON(exp));
-		/*
-		 * 将对象转化成json对象再进行比对
-		 */
+	}*/
+	
+	@Test
+	public void testQueryById1() throws Exception {
+		Grade grade =new Grade();
+		grade.setGradName("myName");
+		
+		int key = 0;
+		key = this.gradeService.addOneClass(grade);
+		
+		System.out.println(JSON.toJSON(key));
+		//assertEquals(JSON.toJSON(userInfo),JSON.toJSON(exp));
 	}
 }
