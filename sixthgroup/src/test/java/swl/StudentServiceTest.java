@@ -41,8 +41,10 @@ public class StudentServiceTest {
 		//fail("Not yet implemented");	
 		Student act = new Student();
 		act = this.studentService.getOneStudent("20130001");
-		LOGGER.info(JSON.toJSON(act));
-		//assertEquals(JSON.toJSON(act),JSON.toJSON(exp));
+		Student exp = new Student();
+		exp =  this.studentService.getOneStudent("20130001");
+		//LOGGER.info(JSON.toJSON(act));
+		assertEquals(JSON.toJSON(act),JSON.toJSON(exp));
 	}
 	
 	@Test
@@ -85,7 +87,7 @@ public class StudentServiceTest {
 		//fail("Not yet implemented");	
 		int act = 0;
 		act = this.studentService.deleteOne("20130001");
-		int exp = 1;
+		int exp = 2;
 		//LOGGER.info(JSON.toJSON(list));
 		assertEquals(JSON.toJSON(act),JSON.toJSON(exp));
 	}
@@ -111,7 +113,7 @@ public class StudentServiceTest {
 		act.setStudNum("20130001");
 		
 		int key1 = this.studentService.updateOne(act);
-		int key2 = 1;
+		int key2 = 2;
 		//LOGGER.info(JSON.toJSON(list));
 		assertEquals(JSON.toJSON(key1),JSON.toJSON(key2));
 	}
